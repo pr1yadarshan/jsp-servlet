@@ -2,6 +2,8 @@ package com.priyadarshan;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +20,18 @@ public class AddServlet extends HttpServlet{
 	 * res.getWriter().println(i + j); }
 	 */
 	
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		int i = Integer.parseInt(req.getParameter("num1"));
 		int j = Integer.parseInt(req.getParameter("num2"));
 		
 		res.getWriter().println(i + j);
+		
+		/*
+		 * RequestDispatcher is an interface which is used to call a another servlet from one servlet
+		 * as RequestDispatcher is an interface, to get the object of it, we will use a function called getRequestDispatcher("Servlet Name")
+		 * and call it using req object
+		 */
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("square");
+		requestDispatcher.forward(req, res);
 	}
 }
